@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
 import { CompaniesModule } from './companies/companies.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ProvincesModule } from './provinces/provinces.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    UsersModule,
     CompaniesModule,
     ProvincesModule,
     TypeOrmModule.forRoot({
@@ -21,6 +20,7 @@ import { ProvincesModule } from './provinces/provinces.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    AuthModule,
   ],
 })
 export class AppModule { }
