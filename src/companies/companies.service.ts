@@ -23,7 +23,7 @@ export class CompaniesService {
 
   async findAll(): Promise<Company[]> {
     try {
-      return await this.companyRepository.find();
+      return await this.companyRepository.find({ relations: ['empleos'] });
     } catch (error) {
       throw new InternalServerErrorException('Failed to retrieve companies');
     }
@@ -31,7 +31,7 @@ export class CompaniesService {
 
   async findOne(id: number): Promise<Company> {
     try {
-      const company = await this.companyRepository.findOneBy({ id });
+      const company = await this.companyRepository.findOne({ where: { id }, relations: ['empleos'] });
       if (!company) {
         throw new NotFoundException(`Company with ID ${id} not found`);
       }

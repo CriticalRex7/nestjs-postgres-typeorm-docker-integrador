@@ -4,11 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ProvincesModule } from './provinces/provinces.module';
 import { AuthModule } from './auth/auth.module';
+import { EmpleosModule } from './empleos/empleos.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    CompaniesModule,
     ProvincesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -21,6 +21,8 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
     }),
     AuthModule,
+    CompaniesModule,
+    EmpleosModule,
   ],
 })
 export class AppModule { }

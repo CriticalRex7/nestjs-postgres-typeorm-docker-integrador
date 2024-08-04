@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Empleo } from 'src/empleos/entities/empleo.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Company {
@@ -16,4 +17,7 @@ export class Company {
 
     @Column()
     province: string;
+
+    @OneToMany(() => Empleo, empleo => empleo.company)
+    empleos: Empleo[];
 }
