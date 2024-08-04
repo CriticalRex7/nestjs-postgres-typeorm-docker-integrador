@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -14,9 +14,33 @@ export class User {
     @Column({ type: 'varchar', length: 100 })
     password: string;
 
+    @ManyToOne(() => Role)
+    @JoinColumn({ name: 'roleId' })
+    role: Role;
+
+    @Column({ type: 'int' })
+    roleId: number;
+
     @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn()
     updatedAt: Date;
 }
+
+@Entity('roles')
+export class Role {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({ type: 'varchar', length: 100, unique: true })
+    name: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
+}
+
+
